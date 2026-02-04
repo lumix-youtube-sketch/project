@@ -66,12 +66,12 @@ def clean_texture(filename, mirror=False):
             else:
                 new_data.append(item)
         img.putdata(new_data)
-        
+
         # !!! ИСПРАВЛЕНИЕ: Обрезаем невидимые края, чтобы не было левитации
         bbox = img.getbbox()
         if bbox:
             img = img.crop(bbox)
-            
+
         if mirror: img = img.transpose(Image.FLIP_LEFT_RIGHT)
         return arcade.Texture(img)
     except:
@@ -82,7 +82,7 @@ class MyGame(arcade.Window):
     def __init__(self):
         super().__init__(title=SCREEN_TITLE, fullscreen=True)
         self.screen_width, self.screen_height = self.get_size()
-        
+
         # Убираем размытие краев, чтобы не было щелей между блоками
         try:
             self.ctx.default_texture_filter = (arcade.gl.NEAREST, arcade.gl.NEAREST)
@@ -213,7 +213,7 @@ class MyGame(arcade.Window):
         tile_scale = self.scales["tile"]
         real_tile_w = int(self.textures["ground"].width * tile_scale)
         real_tile_h = int(self.textures["ground"].height * tile_scale)
-        
+
         # Шаг чуть меньше ширины для плотной стыковки
         step_x = real_tile_w - 1
         step_y = int(real_tile_h * 0.75)
